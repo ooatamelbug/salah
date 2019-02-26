@@ -18,7 +18,7 @@ def Departserializers(requset):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data,status=status.HTTP_404_NOT_FOUND)
 
     if requset.method == 'GET':
         depart = Depart.objects.all()
@@ -47,7 +47,7 @@ def Departserializersd(requset, pk):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data,status=status.HTTP_404_NOT_FOUND)
 
 
     if requset.method == 'DELETE':
@@ -66,7 +66,7 @@ def Productsserializers(requset):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data,status=status.HTTP_404_NOT_FOUND)
 
     if requset.method == 'GET':
         depart = Products.objects.all()
@@ -95,7 +95,7 @@ def Productsserializerd(requset, pk):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors,status=status.HTTP_201_CREATED)
+            return Response(serializer.errors,status=status.HTTP_404_NOT_FOUND)
 
 
     if requset.method == 'DELETE':
@@ -114,7 +114,7 @@ def ImagesserializerS(requset):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data,status=status.HTTP_404_NOT_FOUND)
 
     if requset.method == 'GET':
         depart = Images.objects.all()
@@ -143,7 +143,7 @@ def ImagesserializerD(requset, pk):
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors,status=status.HTTP_201_CREATED)
+            return Response(serializer.errors,status=status.HTTP_404_NOT_FOUND)
 
 
     if requset.method == 'DELETE':
