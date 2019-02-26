@@ -9,6 +9,16 @@ class Depart(models.Model):
         return self.name
 
 
+class User(models.Model):
+    """docstring forUser."""
+    name = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    stat = models.IntegerField(default=1)
+    """docstrDepart"""
+    def __str__(self):
+        return self.name
+
+
 
 class Products(models.Model):
     name = models.CharField(max_length=40)

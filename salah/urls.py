@@ -14,5 +14,7 @@ urlpatterns = [
     path('product/<int:pk>/',views.Productsserializerd),
     path('image/',views.ImagesserializerS),
     path('image/<int:pk>/',views.ImagesserializerD),
+    path('adminprofile/',views.login),
+    path('adminprofile/<int:pk>/',views.Userserializers),
 ]
 #urlpatterns = format_suffix_patterns(urlpatterns)
