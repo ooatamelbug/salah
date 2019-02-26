@@ -1,0 +1,18 @@
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+from salah import views
+
+'''
+urlpatterns = [
+    path('depart/',views.Departserializers.as_view()),
+]
+'''
+urlpatterns = [
+    path('depart/',views.Departserializers),
+    path('depart/<int:pk>/',views.Departserializersd),
+    path('product/',views.Productsserializers),
+    path('product/<int:pk>/',views.Productsserializerd),
+    path('image/',views.ImagesserializerS),
+    path('image/<int:pk>/',views.ImagesserializerD),
+]
+#urlpatterns = format_suffix_patterns(urlpatterns)
