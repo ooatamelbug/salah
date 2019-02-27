@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework import authentication
-from rest_framework.permissions import IsAdminUser
+#from rest_framework.permissions import IsAdminUser
 from salah.models import Depart , Products, Images
 from django.contrib.auth import authenticate , login
 
@@ -204,17 +204,15 @@ def login(request):
 def login(request):
     username = request.data.get['username']
     password = request.data.get['password']
-    try:
-        user = User.objects.get(name=username,password=password)
-    except Depart.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    if username is None or password is None:
+        return Response({"errror":"error"},status=HTTP_400_BAD_REQUEST)
 
+    user = authenticate(username=username,password=password)
     if user:
-        userid = user['id']
-        user = authenticate(name=username,password=password,id=userid)
+        token, _ = Token.objects.get_or_create(user=user)
         login(request,user)
-        serializer = Userserializer(depart)
-        return Response(serializer.data)
+        return Response({'token':token.key})
+    return Response({"errror":"invalid login"},status=HTTP_400_BAD_REQUEST)
 
 
 
