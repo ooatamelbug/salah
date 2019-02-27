@@ -7,21 +7,22 @@ class Departserializer(serializers.ModelSerializer):
         model = Depart
         fields = ('id','name')
 
-class Productsserializer(serializers.ModelSerializer):
-    depart = Departserializer()
-    class Meta:
-        model = Products
-        fields = '__all__'
-
 class Imagesserializer(serializers.ModelSerializer):
-    products = Productsserializer()
     class Meta:
         model = Images
-        fields = '__all__'
+        fields = ('id','link')
+
+
+class Productsserializer(serializers.ModelSerializer):
+    depart = Departserializer()
+    images__link = Imagesserializer(source='images_set',many=True)
+    class Meta:
+        model = Products
+        #fields = '__all__'
+        fields = ('name','price','currency','quantity','discount','date','discounttime','describ','depart','images__link')
 
 
 class Userserializer(serializers.ModelSerializer):
-    products = Productsserializer()
     class Meta:
         model = User
         fields = ('id','name','password')

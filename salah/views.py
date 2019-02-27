@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from salah.serializer import Departserializer ,Productsserializer ,Imagesserializer, Userserializer
 from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework import authentication
 from salah.models import Depart , Products, Images
 from django.contrib.auth import authenticate , login
 
@@ -14,9 +15,9 @@ from django.contrib.auth import authenticate , login
 
 
 @api_view(['GET','POST'])
-def Departserializers(requset):
+def Departserializers(request):
     if request.method == 'POST':
-        serializer = Departserializer(data=requset.data)
+        serializer = Departserializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
@@ -31,7 +32,7 @@ def Departserializers(requset):
 
 
 @api_view(['GET','PUT','DELETE'])
-def Departserializersd(requset, pk):
+def Departserializersd(request, pk):
     try:
         depart = Depart.objects.get(id=pk)
     except Depart.DoesNotExist:
@@ -45,7 +46,7 @@ def Departserializersd(requset, pk):
 
 
     if request.method == 'PUT':
-        serializer = Departserializer(data=requset.data)
+        serializer = Departserializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
@@ -62,7 +63,7 @@ def Departserializersd(requset, pk):
 
 
 @api_view(['GET','POST'])
-def Productsserializers(requset):
+def Productsserializers(request):
     if request.method == 'POST':
         serializer = Productsserializer(data=requset.data)
         if serializer.is_valid():
@@ -79,7 +80,7 @@ def Productsserializers(requset):
 
 
 @api_view(['GET','PUT','DELETE'])
-def Productsserializerd(requset, pk):
+def Productsserializerd(request, pk):
     try:
         depart = Products.objects.get(id=pk)
     except Depart.DoesNotExist:
@@ -93,7 +94,7 @@ def Productsserializerd(requset, pk):
 
 
     if request.method == 'PUT':
-        serializer = Productsserializer(data=requset.data)
+        serializer = Productsserializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
@@ -110,9 +111,9 @@ def Productsserializerd(requset, pk):
 
 
 @api_view(['GET','POST'])
-def ImagesserializerS(requset):
+def ImagesserializerS(request):
     if request.method == 'POST':
-        serializer = Imagesserializer(data=requset.data)
+        serializer = Imagesserializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
@@ -127,7 +128,7 @@ def ImagesserializerS(requset):
 
 
 @api_view(['GET','PUT','DELETE'])
-def ImagesserializerD(requset, pk):
+def ImagesserializerD(request, pk):
     try:
         depart = Images.objects.get(id=pk)
     except Depart.DoesNotExist:
