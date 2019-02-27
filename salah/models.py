@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Depart(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
     """docstrDepart"""
     def __str__(self):
         return self.name
@@ -21,8 +21,8 @@ class User(models.Model):
 
 
 class Products(models.Model):
-    name = models.CharField(max_length=40)
-    currency = models.CharField(max_length=40)
+    name = models.CharField(max_length=100)
+    currency = models.CharField(max_length=100)
     price = models.CharField(max_length=100)
     quantity = models.CharField(max_length=100)
     discount = models.IntegerField()

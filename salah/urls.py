@@ -9,7 +9,9 @@ urlpatterns = [
 '''
 urlpatterns = [
     path('depart/',views.Departserializers),
+    path('departall/',views.DepartserializersG),
     path('depart/<int:pk>/',views.Departserializersd),
+    path('departall/<int:pk>/',views.DepartserializersGd),
     path('product/',views.Productsserializers),
     path('product/<int:pk>/',views.Productsserializerd),
     path('image/',views.ImagesserializerS),
