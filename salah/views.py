@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from salah.serializer import Departserializer ,Productsserializer , Imagesserializer, Userserializer
@@ -15,13 +16,13 @@ from salah.models import Depart , Products, Images
 from django.contrib.auth import authenticate , login
 
 # Create your views here.
-
-@api_view(['GET'])
-def DepartserializersG(request):
-    if request.method == 'GET':
-        departall = Depart.objects.all()
-        serializer = Departserializer(departall,many=True)
-        return Response(serializer.data)
+if request.session['token']:
+    @api_view(['GET'])
+    def DepartserializersG(request):
+        if request.method == 'GET':
+            departall = Depart.objects.all()
+            serializer = Departserializer(departall,many=True)
+            return Response(serializer.data)
 
 
 
@@ -202,18 +203,36 @@ def login(request):
     '''
 @api_view(['POST'])
 def login(request):
-    username = request.data.get['username']
-    password = request.data.get['password']
-    if username is None or password is None:
-        return Response({"errror":"error"},status=HTTP_400_BAD_REQUEST)
+    username = request.data['username']
+    password = request.data['password']
+
+    usernamevalide = User.objects.get(username=username)
+    passworduser = usernamevalide.password
+    if usernamevalide:
+        if check_password(password,passworduser):
+            user = authenticate(username=username,password=password)
+            if user:
+                token, _ = Token.objects.get_or_create(user=user)
+                request.sessions['token'] = token
+                login(request,user)
+                return Response({'token':token.key})
+
+            return Response({"errror":"not user"},status=status.HTTP_400_BAD_REQUEST)
+        return Response({"errror":"invalid password"},status=status.HTTP_400_BAD_REQUEST)
+
+    if not usernamevalide:
+        return Response({"errror":"not user"},status=status.HTTP_400_BAD_REQUEST)
+'''
+    if user:
+        return Response({"errror":"user"},status=status.HTTP_400_BAD_REQUEST)
 
     user = authenticate(username=username,password=password)
     if user:
         token, _ = Token.objects.get_or_create(user=user)
         login(request,user)
         return Response({'token':token.key})
-    return Response({"errror":"invalid login"},status=HTTP_400_BAD_REQUEST)
-
+    return Response({"errror":"invalid login"},status=status.HTTP_400_BAD_REQUEST)
+'''
 
 
 
