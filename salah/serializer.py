@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from salah.models import Depart , Products, Images, User
+from salah.models import Depart , Products, Images
 
 
 class Departserializer(serializers.ModelSerializer):
@@ -20,9 +20,3 @@ class Productsserializer(serializers.ModelSerializer):
         model = Products
         #fields = '__all__'
         fields = ('name','price','currency','quantity','discount','date','discounttime','describ','depart','images__link')
-
-
-class Userserializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id','name','password')
