@@ -10,7 +10,14 @@ class Departserializer(serializers.ModelSerializer):
 class Imagesserializer(serializers.ModelSerializer):
     class Meta:
         model = Images
-        fields = ('id','link')
+        fields = '__all__'
+        #fields = ('id','link')
+
+
+class Productsse(serializers.ModelSerializer):
+    class Meta:
+        model = Products
+        fields =  '__all__'
 
 
 class Productsserializer(serializers.ModelSerializer):
@@ -19,4 +26,4 @@ class Productsserializer(serializers.ModelSerializer):
     class Meta:
         model = Products
         #fields = '__all__'
-        fields = ('name','price','currency','quantity','discount','date','discounttime','describ','depart','images__link')
+        fields = ('id','name','price','currency','quantity','discount','date','discounttime','describ','depart','images__link')
