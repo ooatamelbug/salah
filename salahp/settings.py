@@ -24,8 +24,8 @@ SECRET_KEY = 'xov=#hvtalx@blm0k7=b5_7)ufmzwn1$jhl+661pogo-acyv8f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['warm-sands-99452.herokuapp.com']
+# warm-sands-99452.herokuapp.com
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
